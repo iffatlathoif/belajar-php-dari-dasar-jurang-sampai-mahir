@@ -5,13 +5,15 @@ $dir = str_replace('\\', '/', __DIR__);
 require_once $dir . "/../Entity/TodoList.php";
 require_once $dir . "/../Repository/TodoListRepository.php";
 require_once $dir . "/../Service/TodoListService.php";
+require_once $dir . "/../Config/Database.php";
 
 use Service\TodoListServiceImpl;
 use Repository\TodoListRepositoryImpl;
 
 function testShowTodoList(): void
 {
-    $todoListRepository = new TodoListRepositoryImpl();
+    $connection = \Config\Database::getConnection();
+    $todoListRepository = new TodoListRepositoryImpl($connection);
     $todoListSevice = new TodoListServiceImpl($todoListRepository);
 
     $todoListSevice->showTodoList();
@@ -19,26 +21,24 @@ function testShowTodoList(): void
 
 function testAddTodoList()
 {
-    $todoListRepository = new TodoListRepositoryImpl();
+    $connection = \Config\Database::getConnection();
+    $todoListRepository = new TodoListRepositoryImpl($connection);
     $todoListService = new TodoListServiceImpl($todoListRepository);
     $todoListService->addTodoList("Belajar PHP Dasar");
     $todoListService->addTodoList("Belajar PHP OOP");
     $todoListService->addTodoList("Belajar PHP Database");
-    $todoListService->showTodoList();
+    // $todoListService->showTodoList();
 }
 
 function testRemoveTodoList()
 {
-    $todoListRepository = new TodoListRepositoryImpl();
+    $connection = \Config\Database::getConnection();
+    $todoListRepository = new TodoListRepositoryImpl($connection);
     $todoListService = new TodoListServiceImpl($todoListRepository);
-    $todoListService->addTodoList("Belajar PHP Dasar");
-    $todoListService->addTodoList("Belajar PHP OOP");
-    $todoListService->addTodoList("Belajar PHP Database");
-    $todoListService->showTodoList();
-    $todoListService->removeTodoList(1);
-    $todoListService->showTodoList();
+
+    echo $todoListRepository->remove(5) . PHP_EOL;
 
 }
 
-testRemoveTodoList();
+testAddTodoList();
 
