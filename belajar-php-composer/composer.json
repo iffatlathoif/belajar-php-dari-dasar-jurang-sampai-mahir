@@ -1,0 +1,19 @@
+{
+    "name": "iffat/beljar-php-composer",
+    "description": "Belajar PHP Composer",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Iffat\\BelajarPhpComposer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Muhamad Iffatullathoif",
+            "email": "iffalathoif1997@gmail.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "3.10.0"
+    }
+}
